@@ -10,6 +10,7 @@
 @section('content')
     <?php
     $user_perm = PermissionCheck::check_permission('role-list');
+    $company_id = auth()->user()->company_id;
     ?>
 {{--    <x-breadcrumbs pagename="USERS" pagetitle="VIEW_USER_LIST"/>--}}
 <!-- start page title -->
@@ -114,6 +115,8 @@
     {{--    <script src="{{ asset('assets/js/pages/demo.datatable-init.js')}}"></script>--}}
     <!-- end demo js-->
     <script>
+        var user_perm = <?php echo json_encode($user_perm); ?>;
+        var company_id = '<?php echo $company_id; ?>';
         $(document).ready(function () {
             $.ajaxSetup({
                 headers: {
@@ -216,18 +219,30 @@
                     {
                         data: 'action', name: 'action', orderable: false,
                         render: function (data, type, row) {
-
                             var edit_fun = '{{url('role-edit')}}/'+ row.action;
                             var delete_fun = "remove_id('" + row.action + "','{{route('role.delete')}}','#role-datatable')";
-                            var delete_action = '<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '"><i class="mdi mdi-delete"></i></a>';
+                            var edit ='';
+                            var delete_action ='';
+                            // var delete_action = '<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '"><i class="mdi mdi-delete"></i></a>';
+                            // if(row.display_flag==1){
+                            //     delete_action='';
+                            // }
+                            if($.inArray('edit-role', user_perm) != -1 || company_id==''){
+                                var edit ='<a href="'+edit_fun+'" class="action-icon mr-1">' +
+                                    '<i class="mdi mdi-square-edit-outline"></i>' +
+                                    '</a>';
+                            }
+                            if($.inArray('remove-role', user_perm) != -1 || company_id==''){
+                                var delete_action = '<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '"><i class="mdi mdi-delete"></i></a>';
+                            }
                             if(row.display_flag==1){
                                 delete_action='';
                             }
-
                             return '<div class="invoice-action">' +
-                                '<a href="'+edit_fun+'" class="action-icon mr-1">' +
-                                '<i class="mdi mdi-square-edit-outline"></i>' +
-                                '</a>' +
+                                // '<a href="'+edit_fun+'" class="action-icon mr-1">' +
+                                // '<i class="mdi mdi-square-edit-outline"></i>' +
+                                // '</a>'
+                                edit +
                                 delete_action+
                                 '</div>';
                         }

@@ -12,6 +12,7 @@
 @section('content')
     <?php
     $user_perm = PermissionCheck::check_permission('role-list');
+    $company_id = auth()->user()->company_id;
     ?>
     <!-- start page title -->
     <div class="row">
@@ -255,6 +256,8 @@
 
     <!-- third party js ends -->
     <script>
+        var user_perm = <?php echo json_encode($user_perm); ?>;
+        var company_id = '<?php echo $company_id; ?>';
         $(document).ready(function () {
             $('#followup_date').datepicker({
                 startDate: new Date(),
@@ -498,10 +501,25 @@
                             var duplicate_est_fun = "estimate_duplicate('" + row.action + "')";
                             var follow_up_fun = " openFollowUpModal('#follow-up-modal','Next Follow Up','#follow-up-form','.modal-title','" + row.action + "','0','" + row.estimate_no + "','" + row.status + "','{{route('event.index')}}',1,'" + row.customer_name + "','" + row.mobile_no + "')";
                             var view_fun = "{{url('quotes/show')}}/" + row.action;
+                            if($.inArray('edit-estimate', user_perm) != -1 || company_id==''){
+                                var edit ='<a href="' + edit_fun + '" title="Edit" class="action-icon me-1" id="edit_' + row.action + '">' +
+                                    '<i class="mdi mdi-square-edit-outline fs-4"></i>' +
+                                    '</a>';
+                            }else{
+                                var edit = '';
+                            }
+                            if($.inArray('remove-estimate', user_perm) != -1 || company_id==''){
+                                var del = '<a href="javascript:void(0)" title="Delete" class="action-icon" id="remove_' + row.action + '" onclick="' + delete_fun + '">' +
+                                    '<i class="mdi mdi-delete fs-4"></i>' +
+                                    '</a>' ;
+                            }else{
+                                var del = '';
+                            }
                             return '<div class="invoice-action">' +
-                                '<a href="' + edit_fun + '" title="Edit" class="action-icon me-1" id="edit_' + row.action + '">' +
-                                '<i class="mdi mdi-square-edit-outline fs-4"></i>' +
-                                '</a>' +
+                                // '<a href="' + edit_fun + '" title="Edit" class="action-icon me-1" id="edit_' + row.action + '">' +
+                                // '<i class="mdi mdi-square-edit-outline fs-4"></i>' +
+                                // '</a>'
+                                edit +
 
                                 '<a href="' + row.download_action + '" title="Download" class="action-icon me-1" download>' +
                                 '<i class="mdi mdi-download fs-4"></i>' +
@@ -514,9 +532,10 @@
                                 ' <a href="javascript:void(0)" title="Duplicate" class="action-icon" id="duplicate_' + row.action + '" onclick="' + duplicate_est_fun + '">' +
                                 '<i class="mdi mdi-content-copy fs-4"></i>' +
                                 '</a>' +
-                                '<a href="javascript:void(0)" title="Delete" class="action-icon" id="remove_' + row.action + '" onclick="' + delete_fun + '">' +
-                                '<i class="mdi mdi-delete fs-4"></i>' +
-                                '</a>' +
+                                // '<a href="javascript:void(0)" title="Delete" class="action-icon" id="remove_' + row.action + '" onclick="' + delete_fun + '">' +
+                                // '<i class="mdi mdi-delete fs-4"></i>' +
+                                // '</a>'
+                                del +
                                 '</div>';
 
                             /*  return '<div class="btn-group dropdown btn-group-sm">' +

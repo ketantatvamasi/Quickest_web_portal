@@ -98,9 +98,7 @@ class DashboardController extends Controller
         return ["current_fiscal_year" => $fy, "previous_fiscal_year"=>($y-1)."-04-01"."_".($pt-1)."-03-31","last_twelve_month"=>date('Y-m-d', strtotime(' - 12 months'))."_".date('Y-m-d'),"fd" =>$y."-04-01","ed"=>$pt."-03-31"];
     }
 
-    public function barChart(Request $request)
-    {
-
+    public function barChart(Request $request){
         $monthArr = [];
         $input = $request->all();
         $user = auth()->user();
@@ -135,11 +133,6 @@ class DashboardController extends Controller
 //            ->get();
 //dd(DB::getQueryLog());
 //dd($items);
-
-
-
-
-
 
         $records = Estimate::query()
             ->where(function ($query) use ($user, $input) {
@@ -189,14 +182,12 @@ class DashboardController extends Controller
                     $dataArr[$v]['close'][] = 0;
 //                }
             }
-
             foreach ($dataArr as $key => $value) {
                 $sum_sent = array_sum($value['sent']);
                 $sum_close = array_sum($value['close']);
                 array_push($labels, $key);
                 array_push($sent, $sum_sent);
                 array_push($close, $sum_close);
-
             }
         }
 
@@ -259,7 +250,7 @@ class DashboardController extends Controller
         return response()->json([
             "success" => true,
             "message" => "Follow up retrieved successfully.",
-"data"=>$sales_performance,
+            "data"=>$sales_performance,
             "series" => $series,
             "labels" => ["Completion Ratio","Performance"],
             "total_task" => (int)$total_task[0],

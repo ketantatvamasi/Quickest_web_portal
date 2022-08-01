@@ -10,6 +10,7 @@
 @section('content')
     <?php
     $user_perm = PermissionCheck::check_permission('role-list');
+    $company_id = auth()->user()->company_id;
     ?>
     <!-- start page title -->
     <div class="row">
@@ -130,6 +131,8 @@
     {{--    <script src="{{ asset('assets/js/pages/demo.datatable-init.js')}}"></script>--}}
     <!-- end demo js-->
     <script>
+        var user_perm = <?php echo json_encode($user_perm); ?>;
+        var company_id = '<?php echo $company_id; ?>';
         $(document).ready(function () {
             $.ajaxSetup({
                 headers: {
@@ -250,16 +253,29 @@
                     {
                         data: 'action', name: 'action', orderable: false,
                         render: function (data, type, row) {
-
                             var edit_fun = "edit_id('" + row.action + "')";
                             var delete_fun = "remove_id('" + row.action + "','{{route('country.delete')}}','#country-datatable')";
+                            var edit = '';
+                            var del = '';
+                            if($.inArray('edit-country', user_perm) != -1 || company_id==''){
+                                var edit ='<a href="javascript:void(0)" class="action-icon mr-1" id="edit_' + row.action + '" onclick="' + edit_fun + '">' +
+                                    '<i class="mdi mdi-square-edit-outline"></i>' +
+                                    '</a>';
+                            }
+                            if($.inArray('remove-country', user_perm) != -1 || company_id==''){
+                                var del =  '<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '">' +
+                                    '<i class="mdi mdi-delete"></i>' +
+                                    '</a>';
+                            }
                             return '<div class="invoice-action">' +
-                                '<a href="javascript:void(0)" class="action-icon mr-1" id="edit_' + row.action + '" onclick="' + edit_fun + '">' +
-                                '<i class="mdi mdi-square-edit-outline"></i>' +
-                                '</a>' +
-                                '<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '">' +
-                                '<i class="mdi mdi-delete"></i>' +
-                                '</a>' +
+                                // '<a href="javascript:void(0)" class="action-icon mr-1" id="edit_' + row.action + '" onclick="' + edit_fun + '">' +
+                                // '<i class="mdi mdi-square-edit-outline"></i>' +
+                                // '</a>'
+                               edit +
+                                // '<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '">' +
+                                // '<i class="mdi mdi-delete"></i>' +
+                                // '</a>'
+                                del +
                                 '</div>';
                         }
                     },

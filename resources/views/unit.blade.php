@@ -11,7 +11,6 @@
     <?php
     $user_perm = PermissionCheck::check_permission('role-list');
     $company_id = auth()->user()->company_id;
-
     ?>
     <!-- start page title -->
     <div class="row">
@@ -136,14 +135,8 @@
     <!-- end demo js-->
     <script>
         var user_perm = <?php echo json_encode($user_perm); ?>;
-        {{--var company_id = <?php echo $company_id; ?>;--}}
+        var company_id = '<?php echo $company_id; ?>';
         $(document).ready(function () {
-            // alert(user)
-            // if($.inArray('edit-unit', user_perm) || ){
-            //     alert('edit');
-            // }else{
-            //     alert('not edit')
-            // }
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -263,22 +256,19 @@
                     {
                         data: 'action', name: 'action', orderable: false,
                         render: function (data, type, row) {
-
                             var edit_fun = "edit_id('" + row.action + "')";
                             var delete_fun = "remove_id('" + row.action + "','{{route('unit.delete')}}','#unit-datatable')";
-                            if($.inArray('edit-unit', user_perm) != -1){
+                            var edit = '';
+                            var del = '';
+                            if($.inArray('edit-unit', user_perm) != -1 || company_id==''){
                                 var edit ='<a href="javascript:void(0)" class="action-icon mr-1" id="edit_' + row.action + '" onclick="' + edit_fun + '">' +
                                     '<i class="mdi mdi-square-edit-outline"></i>' +
                                     '</a>';
-                            }else{
-                                var edit = '';
                             }
-                            if($.inArray('remove-unit', user_perm) != -1){
+                            if($.inArray('remove-unit', user_perm) != -1 || company_id==''){
                                 var del ='<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '">' +
                                     '<i class="mdi mdi-delete"></i>' +
                                     '</a>';
-                            }else{
-                                var del = '';
                             }
                             return '<div class="invoice-action">' +
                                 // '<a href="javascript:void(0)" class="action-icon mr-1" id="edit_' + row.action + '" onclick="' + edit_fun + '">' +
