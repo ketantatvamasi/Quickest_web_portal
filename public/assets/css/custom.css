@@ -1,0 +1,128 @@
+.parsley-errors-list {
+    color: #B94A48 !important;
+    margin-bottom: 0px;
+    padding-left: 0px !important;
+    list-style: none;
+}
+
+.swal2-cancel {
+    margin-left: 0.75rem !important;
+}
+
+.zoom {
+    transition: transform .2s;
+    width: 32px;
+    height: 32px;
+}
+
+.zoom:hover {
+    transform: scale(1.5);
+}
+
+.hideIntakeField {
+    display: none;
+}
+.dt-button-collection .dropdown-menu{
+    height: 9rem;
+    overflow-y: auto;
+}
+
+.hideIntakeField {
+    display: none;
+}
+.page-title-box .page-title-right {
+    float: right;
+    margin-top: 10px !important;
+}
+.breadcrumb {
+    padding: 0rem 0!important;
+}
+.page-title-right{
+    display: block !important;
+}
+/*body .dataTables_wrapper .dataTables_scrollBody{
+    min-height: 200px !important;
+}*/
+page[size="A4"] {
+    width: 21cm;
+    height: 29.7cm;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+.main-page {
+
+    width: 210mm;
+    min-height: 240mm;
+    /*margin: 10mm auto;*/
+    /*background: red;*/
+    /*box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);*/
+    /*margin-top: 0px !important;*/
+}
+
+/*.sub-page {*/
+/*    !*padding: 1cm;*!*/
+/*    !*height: 297mm;*!*/
+/*}*/
+
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+    .main-page {
+        /*margin: 0;*/
+        /*border: initial;*/
+        /*border-radius: initial;*/
+        /*width: 210mm;*/
+        /*height: 297mm;*/
+        /*min-height: initial;*/
+        /*box-shadow: initial;*/
+        /*background: initial;*/
+        /*page-break-after: always;*/
+    }
+}
+.morecontent span {
+    display: none;
+}
+.morelink {
+    display: block;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /*position: absolute;
+    top: 0;
+    left: 0;
+    cursor: default;
+    height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;*/
+}

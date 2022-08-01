@@ -1,0 +1,160 @@
+[33mcommit f377ff033f8b838b51644c9ecbc49763aabf9385[m[33m ([m[1;36mHEAD -> [m[1;32mChetan_Moradiya[m[33m, [m[1;31morigin/Chetan_Moradiya[m[33m)[m
+Author: chetan <chetan.tatvamasi@gmail.com>
+Date:   Sat Dec 25 18:10:44 2021 +0530
+
+    column visibity
+
+[33mcommit d8f3269240c10ee1b2605489dacb127fb5eb39e0[m[33m ([m[1;31morigin/labs-dev[m[33m)[m
+Merge: 489038d 5c1796b
+Author: Chetan Moradiya <95215819+chetan-1996@users.noreply.github.com>
+Date:   Sat Dec 25 17:32:21 2021 +0530
+
+    Merge pull request #7 from tatvamasi-labs/Chetan_Moradiya
+    
+    company category,item and product master with email verified client re…
+
+[33mcommit 5c1796b52c459cdf6ba768d10ba884d8f7722fea[m
+Author: chetan <chetan.tatvamasi@gmail.com>
+Date:   Sat Dec 25 17:31:06 2021 +0530
+
+    companycategory,item and product master with email verified client registered time
+
+[33mcommit 489038d937b905ab20641425173506678e1d3fac[m
+Merge: 52ecbd6 d38a5bd
+Author: Chetan Moradiya <95215819+chetan-1996@users.noreply.github.com>
+Date:   Tue Dec 21 09:34:22 2021 +0530
+
+    Merge pull request #6 from tatvamasi-labs/Chetan_Moradiya
+    
+    Create country-state-city and product master with code optimize
+
+[33mcommit d38a5bd6cb5e22bd6f215248f3354a8708969fce[m
+Merge: 7c57c1a 52ecbd6
+Author: Chetan Moradiya <95215819+chetan-1996@users.noreply.github.com>
+Date:   Tue Dec 21 09:34:12 2021 +0530
+
+    Merge branch 'labs-dev' into Chetan_Moradiya
+
+[33mcommit 7c57c1ae2c843e31283f713591e83931567087fe[m[33m ([m[1;32mlabs-dev[m[33m)[m
+Author: chetan <chetan.tatvamasi@gmail.com>
+Date:   Tue Dec 21 09:23:45 2021 +0530
+
+    Create country-state-city and product master with code optimize
+
+[33mcommit 52ecbd604fc1b46fe4f03d71730105feed40054e[m
+Author: jaydeeptank-git <83170246+jaydeeptank-git@users.noreply.github.com>
+Date:   Mon Dec 20 17:07:51 2021 +0530
+
+    [JT] admin auth complete
+
+[33mcommit 67ece108be5fab7e493d346a5ea9e287303de877[m
+Merge: 3f59d36 20ebdaa
+Author: jaydeeptank <jaydeeptank90@gmail.com>
+Date:   Sat Dec 18 16:41:50 2021 +0530
+
+    Conflict solved
+
+[33mcommit 20ebdaa6f16008118b7469a3713e81f416536c7a[m
+Author: jaydeeptank <jaydeeptank90@gmail.com>
+Date:   Sat Dec 18 16:25:38 2021 +0530
+
+    [JT] breadcrumbs setup
+
+[33mcommit 3f59d36ae3595e41c937be1d9a63e66a033f3c1d[m
+Merge: 48671f0 aeb750a
+Author: Chetan Moradiya <95215819+chetan-1996@users.noreply.github.com>
+Date:   Sat Dec 18 14:33:24 2021 +0530
+
+    Merge pull request #3 from tatvamasi-labs/Chetan
+    
+    unit with activity log
+
+[33mcommit aeb750a304f540ddad91231524e2c87dde151386[m[33m ([m[1;31morigin/Chetan[m[33m, [m[1;32mChetan[m[33m)[m
+Author: chetan <chetan.tatvamasi@gmail.com>
+Date:   Sat Dec 18 14:31:36 2021 +0530
+
+    unit with activity log
+
+[33mcommit f83df3f497535f5699593e19f6057954313fefc7[m
+Author: jaydeeptank <jaydeeptank90@gmail.com>
+Date:   Sat Dec 18 11:38:54 2021 +0530
+
+    [JT] remove extra js pages and add js on bottom of th epage
+
+[33mcommit dc3102f4efd375710324c84c9d3b20f5febf50bb[m
+Author: jaydeeptank <jaydeeptank90@gmail.com>
+Date:   Sat Dec 18 11:12:00 2021 +0530
+
+    [JT] remove page from directory
+
+[33mcommit fbb6004a52b61828899d6d465320ec81a85f6a1f[m
+Author: jaydeeptank <jaydeeptank90@gmail.com>
+Date:   Sat Dec 18 10:36:15 2021 +0530
+
+    [JT] Datatable
+
+[33mcommit cae6681a73cfc6c4a525ea97a522fa10d1e6ad12[m
+Author: jaydeeptank <jaydeeptank90@gmail.com>
+Date:   Sat Dec 18 01:43:28 2021 +0530
+
+    [JT] All permission and role allocation done withe user create
+
+[33mcommit 002261fe16a0434cbf8b9c3045a804939101fda0[m
+Author: jaydeeptank <jaydeeptank90@gmail.com>
+Date:   Fri Dec 17 20:53:26 2021 +0530
+
+    [JT] Permission issue solved
+
+[33mcommit 271c81cbd3fa1d8458fa93eb40e9f08d9e59e166[m
+Author: jaydeeptank-git <83170246+jaydeeptank-git@users.noreply.github.com>
+Date:   Fri Dec 17 17:55:52 2021 +0530
+
+    [JT] Permission change
+
+[33mcommit 8613f7bb712f8d3c2a0b573fcb96565092bd6acf[m
+Author: jaydeeptank-git <83170246+jaydeeptank-git@users.noreply.github.com>
+Date:   Fri Dec 17 12:42:36 2021 +0530
+
+    [JT]Permission view
+
+[33mcommit 12419773a342d9271d292f4a245ea5731acc7d4f[m
+Author: jaydeeptank <jaydeeptank90@gmail.com>
+Date:   Fri Dec 17 09:32:00 2021 +0530
+
+    [JT] login if change
+
+[33mcommit f4fd91dc9258c9892db66137c2d19a64924084bd[m
+Author: jaydeeptank <jaydeeptank90@gmail.com>
+Date:   Thu Dec 16 23:51:04 2021 +0530
+
+    [JT] Complete the role assign flow
+
+[33mcommit 92ea6816cb81686f3a1343c39af0a3bb34662d58[m
+Merge: 33efae8 48671f0
+Author: Chetan Moradiya <95215819+chetan-1996@users.noreply.github.com>
+Date:   Tue Dec 14 17:44:30 2021 +0530
+
+    Merge pull request #2 from tatvamasi-labs/labs-dev
+    
+    Labs dev
+
+[33mcommit 48671f06064d086070290e69f3bf7e44e946b1d3[m
+Merge: 33efae8 371b3a4
+Author: Chetan Moradiya <95215819+chetan-1996@users.noreply.github.com>
+Date:   Tue Dec 14 17:39:10 2021 +0530
+
+    Merge pull request #1 from tatvamasi-labs/Chetan
+    
+    project setup with login
+
+[33mcommit 371b3a4648d4ffefebaf584cf9538aedc02f6788[m
+Author: chetan <chetan.tatvamasi@gmail.com>
+Date:   Tue Dec 14 17:21:18 2021 +0530
+
+    project setup with login
+
+[33mcommit 33efae899958cfb5114df067a10b7cc7a002ad8f[m
+Author: tatvamasi-labs <88017175+tatvamasi-labs@users.noreply.github.com>
+Date:   Mon Nov 29 12:16:23 2021 +0530
+
+    Initial commit

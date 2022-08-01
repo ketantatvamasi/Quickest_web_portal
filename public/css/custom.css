@@ -1,0 +1,27 @@
+.parsley-errors-list {
+    color: #B94A48 !important;
+    margin-bottom: 0px;
+    padding-left: 0px !important;
+    list-style: none;
+}
+
+.swal2-cancel {
+    margin-left: 0.75rem !important;
+}
+
+.zoom {
+    transition: transform .2s;
+    width: 32px;
+    height: 32px;
+}
+
+.zoom:hover {
+    transform: scale(1.5);
+}
+
+.hideIntakeField {
+    display: none;
+}
+body.estimate-datatable_wrapper.dataTables_scrollBody{
+    min-height: 200px !important;
+}
