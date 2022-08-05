@@ -54,6 +54,13 @@ $user_perm = PermissionCheck::check_permission('role-list');
             </li>
             <?php } ?>
 
+            <li class="side-nav-item">
+                <a href="{{url('gst')}}" class="side-nav-link">
+                    <i class="uil-cart"></i>
+                    <span> GST </span>
+                </a>
+            </li>
+
             <?php if(in_array('item-list', $user_perm) || auth()->user()->company_id==null){?>
             <li class="side-nav-item">
                 <a href="{{url('item')}}" class="side-nav-link">

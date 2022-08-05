@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Country')
+@section('title','Unit')
 @push('styles')
     <link href="{{ asset('assets/css/vendor/dataTables.bootstrap5.css')}}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/vendor/responsive.bootstrap5.css')}}" rel="stylesheet" type="text/css">
@@ -16,11 +16,11 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    @if(in_array('add-country', $user_perm) || auth()->user()->company_id==null)
+{{--                    @if(in_array('add-unit', $user_perm) || auth()->user()->company_id==null)--}}
                         <a href="javascript:void(0);" class="btn btn-info btn-sm mb-2"
-                       onclick="openModal('#country-modal','Create Country','#country-form','.modal-title',id=0)"><i
-                            class="mdi mdi-plus-circle"></i> New</a>
-                    @endif
+                           onclick="openModal('#GST-modal','Create GST','#gst-form','.modal-title',id=0)"><i
+                                class="mdi mdi-plus-circle"></i> New</a>
+{{--                    @endif--}}
                     <div class="dropdown btn-group mb-2">
                         <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -39,29 +39,30 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="page-title-left pt-2">
-                    {{--<h4 class="page-title">Country</h4>--}}
-                    <select class="form-select" id="fil_status" name="fil_status"
-                            style="width: 200px;background-color: #fff0 !important;border: 0px solid #fff !important;font-size: 18px;margin: 0;white-space: nowrap;font-weight: 700;padding: 0.0rem 0.0rem 0rem 0.5rem;">
-                        <option value="">All Countries</option>
-                        <option value="0">Active Countries</option>
-                        <option value="1">Deactive Countries</option>
+                    {{--<h4 class="page-title">Unit</h4>--}}
+                    <select class="form-select" id="fil_status" name="fil_status" style="width: 170px;background-color: #fff0 !important;border: 0px solid #fff !important;font-size: 18px;margin: 0;white-space: nowrap;font-weight: 700;padding: 0.0rem 0.0rem 0rem 0.5rem;">
+                        <option value="">All Gsts</option>
+                        <option value="0">Active Gsts</option>
+                        <option value="1">Deactive Gsts</option>
                     </select>
+
                 </div>
             </div>
         </div>
     </div>
     <!-- end page title -->
+
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <table id="country-datatable" class="table table-centered table-sm w-100 nowrap">
+                    <table id="gst-datatable" class="table table-centered table-sm w-100 nowrap">
                         <thead class="table-light">
                         <tr>
                             <th><input type="checkbox" class="form-check-input" id="select_all"></th>
                             <th>Name</th>
-                            <th>Description</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -76,32 +77,42 @@
         </div><!-- end col-->
     </div>
     <!-- end row-->
-    <div id="country-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="GST-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-right" style="width: 100%;">
             <div class="modal-content" style="height: 100%;">
                 <div class="modal-header border-1 bg-light">
-                    <h4 class="modal-title">Create Country</h4>
+                    <h4 class="modal-title">Create Gst</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="ps-3 pe-3 country-form" id="country-form" action="#">
+                    <form class="ps-3 pe-3 gst-form" id="gst-form" action="#">
 
                         <div class="mb-3">
                             <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
-                            <input class="form-control" type="text" id="name" name="name" required=""
-                                   placeholder="Enter name" autofocus>
+{{--                            <input class="form-control" type="text" id="name" name="name" required=""--}}
+{{--                                   placeholder="Enter GST lable" autofocus>--}}
+                            <div class="input-group input-group-merge">
+                                <input class="form-control" type="text" id="name" name="name" required=""
+                                       placeholder="Enter name" autofocus>
+{{--                                <input type="text" id="name" name="name" class="form-control" placeholder="Enter name">--}}
+                                <div class="input-group-text">
+                                    <i class="mdi mdi-percent"></i>
+                                </div>
+                            </div>
                             <input class="form-control" type="hidden" id="id" name="id" value="0">
                         </div>
 
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description"
-                                      placeholder="Enter description"></textarea>
-                        </div>
+{{--                        <div class="mb-3">--}}
+{{--                            <label for="gst_value" class="form-label">GST value</label>--}}
+{{--                            <input class="form-control" id="gst_value" name="gst_value"--}}
+{{--                                   placeholder="Enter GST value" data-parsley-type="number" >--}}
+{{--                            <textarea class="form-control" id="gst_value" name="gst_value"--}}
+{{--                                      placeholder="Enter gst value"></textarea>--}}
+{{--                        </div>--}}
 
                         <div class="mb-3 text-end">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                            <button class="btn btn-secondary" id="country_button" type="submit"><i
+                            <button class="btn btn-secondary" id="gst_button" type="submit"><i
                                     class="uil-arrow-circle-right"></i> Save
                             </button>
                         </div>
@@ -111,6 +122,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
 
 
 @endsection
@@ -137,7 +149,7 @@
                 }
             });
             "use strict";
-            var table = $("#country-datatable").DataTable({
+            var table = $("#gst-datatable").DataTable({
                 // dom: 'Bfrtip',
                 dom:
                     "<'row'<'col-sm-12 col-md-6 text-left'B><'col-sm-12 col-md-6'f>>" +
@@ -151,9 +163,9 @@
                 lengthChange: !1,
                 buttons: [
                     {
-                        extend: 'pageLength',
+                        extend:'pageLength',
                         attr: {
-                            class: 'btn btn-light buttons-collection dropdown-toggle buttons-page-length',
+                            class:'btn btn-light buttons-collection dropdown-toggle buttons-page-length',
                         },
                         exportOptions: {
                             columns: ':visible'
@@ -161,36 +173,36 @@
                     },
                     {
                         extend: 'pdf',
-                        text: '<i class="mdi mdi-file-pdf-box fs-4"></i>',
-                        attr: {
-                            title: 'PDF',
-                            class: 'btn btn-light buttons-html5 buttons-pdf',
+                        text:'<i class="mdi mdi-file-pdf-box fs-4"></i>',
+                        attr:{
+                            title:'PDF',
+                            class:'btn btn-light buttons-html5 buttons-pdf',
                         },
-                        title: 'Country List',
+                        title: 'Unit List',
                         exportOptions: {
                             columns: ':visible'
                         }
                     },
                     {
                         extend: 'excel',
-                        text: '<i class="mdi mdi-microsoft-excel fs-4"></i>',
-                        attr: {
-                            title: 'Excel',
-                            class: 'btn btn-light buttons-html5 buttons-excel',
+                        text:'<i class="mdi mdi-microsoft-excel fs-4"></i>',
+                        attr:{
+                            title:'Excel',
+                            class:'btn btn-light buttons-html5 buttons-excel',
                         },
-                        title: 'Country List',
+                        title: 'Unit List',
                         exportOptions: {
                             columns: ':visible'
                         }
                     },
                     {
                         extend: 'colvis',
-                        text: '<i class="mdi mdi-format-list-bulleted fs-4"></i>',
-                        attr: {
-                            title: 'Column visibility',
-                            class: 'btn btn-light buttons-collection dropdown-toggle buttons-colvis',
+                        text:'<i class="mdi mdi-format-list-bulleted fs-4"></i>',
+                        attr:{
+                            title:'Column visibility',
+                            class:'btn btn-light buttons-collection dropdown-toggle buttons-colvis',
                         },
-                        title: 'Country List',
+                        title: 'Unit List',
                         exportOptions: {
                             columns: ':visible'
                         }
@@ -217,7 +229,7 @@
                     return JSON.parse(localStorage.getItem(settings.sInstance))
                 },
                 ajax: {
-                    url: "{{ route('country.index') }}",
+                    url: "{{ route('gst.index') }}",
                     data: function (d) {
                         d.status = $('#fil_status').val(),
                             d.name = $('#fil_name').val(),
@@ -233,15 +245,15 @@
                         }
                     },
                     {data: 'name', name: 'name', orderable: true},
-                    {data: 'description', name: 'description'},
+                    // {data: 'gst_value', name: 'gst_value'},
                     {
                         data: 'status', name: 'status',
                         render: function (data, type, row) {
-                            var fun_status = "change_status('" + row.action + "', 1,'{{route('country.edit-status')}}','#country-datatable')";
+                            var fun_status = "change_status('" + row.action + "', 1,'{{route('unit.edit-status')}}','#gst-datatable')";
                             if (data == 0)
                                 return '<span class="badge badge-success-lighten" onclick="' + fun_status + '">Active</span>';
                             else {
-                                fun_status = "change_status('" + row.action + "', 0,'{{route('country.edit-status')}}','#country-datatable')";
+                                fun_status = "change_status('" + row.action + "', 0,'{{route('unit.edit-status')}}','#gst-datatable')";
                                 return '<span class="badge badge-danger-lighten" onclick="' + fun_status + '">Deactive</span>';
                             }
 
@@ -251,17 +263,17 @@
                         data: 'action', name: 'action', orderable: false,
                         render: function (data, type, row) {
                             var edit_fun = "edit_id('" + row.action + "')";
-                            var delete_fun = "remove_id('" + row.action + "','{{route('country.delete')}}','#country-datatable')";
+                            var delete_fun = "remove_id('" + row.action + "','{{route('unit.delete')}}','#gst-datatable')";
                             return '<div class="invoice-action">' +
-                                @if(in_array("edit-country", $user_perm) || auth()->user()->company_id==null)
+                                @if(in_array('edit-unit', $user_perm) || auth()->user()->company_id==null)
                                     '<a href="javascript:void(0)" class="action-icon mr-1" id="edit_' + row.action + '" onclick="' + edit_fun + '">' +
-                                    '<i class="mdi mdi-square-edit-outline"></i>' +
-                                    '</a>'+
+                                '<i class="mdi mdi-square-edit-outline"></i>' +
+                                '</a>'+
                                 @endif
-                                @if(in_array("remove-country", $user_perm) || auth()->user()->company_id==null)
+                                    @if(in_array('remove-unit', $user_perm) || auth()->user()->company_id==null)
                                     '<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '">' +
-                                    '<i class="mdi mdi-delete"></i>' +
-                                    '</a>'+
+                                '<i class="mdi mdi-delete"></i>' +
+                                '</a>'+
                                 @endif
                                     '<div>';
                         }
@@ -271,7 +283,7 @@
                     $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
                 }
             });
-            table.buttons().container().appendTo("#country-datatable_wrapper .col-md-6:eq(0)"), $("#alternative-page-datatable").DataTable({
+            table.buttons().container().appendTo("#gst-datatable_wrapper .col-md-6:eq(0)"), $("#alternative-page-datatable").DataTable({
                 pagingType: "full_numbers",
                 drawCallback: function () {
                     $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
@@ -291,29 +303,31 @@
                     .draw();
             });
 
-            formValition('#country-form');
-            $('.country-form').on('submit', function (e) {
+            formValition('#gst-form');
+            $('.gst-form').on('submit', function (e) {
                 e.preventDefault();
                 if ($(this).parsley().isValid()) {
                     $.ajax({
                         async: false,
                         type: 'POST',
-                        url: '{{route('country.store')}}',
+                        url: '{{route('gst.store')}}',
                         contentType: false,
                         cache: false,
                         processData: false,
                         data: new FormData(this),
+                        // data: $('.category-form').serialize(),
                         dataType: "json",
                         beforeSend: function () {
-                            $("#country_button").prop('disabled', true);
-                            $("#country_button").html('<i class="mdi mdi-spin mdi-loading"></i> Loading...');
+                            $("#gst_button").prop('disabled', true);
+                            $("#gst_button").html('<i class="mdi mdi-spin mdi-loading"></i> Loading...');
                         },
                         success: function (data) {
+                            console.log(data);
                             toastrSuccess('Successfully saved...', 'Success');
-                            $('#country-modal').modal('toggle');
+                            $('#gst-modal').modal('toggle');
                             table.ajax.reload();
-                            $("#country_button").prop('disabled', false);
-                            $("#country_button").html('<i class="uil-arrow-circle-right"></i> Save');
+                            $("#gst_button").prop('disabled', false);
+                            $("#gst_button").html('<i class="uil-arrow-circle-right"></i> Save');
                         },
                         error: function (xhr, status, error) {
                             var errorMessage = xhr.status + ': ' + xhr.statusText
@@ -330,12 +344,12 @@
                                 default:
                                     toastrError('Error - ' + errorMessage, 'Error');
                             }
-                            $("#country_button").prop('disabled', false);
-                            $("#country_button").html('<i class="uil-arrow-circle-right"></i> Save');
+                            $("#gst_button").prop('disabled', false);
+                            $("#gst_button").html('<i class="uil-arrow-circle-right"></i> Save');
                         },
                         complete: function (data) {
-                            $("#country_button").html('Save');
-                            $("#country_button").prop('<i class="uil-arrow-circle-right"></i> disabled', false);
+                            $("#gst_button").html('Save');
+                            $("#gst_button").prop('<i class="uil-arrow-circle-right"></i> disabled', false);
                         }
                     });
                 }
@@ -346,16 +360,16 @@
             $.ajax({
                 async: false,
                 type: "GET",
-                url: "{{route('country.show')}}",
+                url: "{{route('unit.show')}}",
                 data: {id: id},
                 dataType: "json",
                 success: function (res) {
-                    resetFormValidation("#country-form");
+                    resetFormValidation("#gst-form");
                     $('#id').val(res.data.id);
                     $('#name').val(res.data.name);
                     $('#description').val(res.data.description);
-                    $('.modal-title').text('Edit Country');
-                    $('#country-modal').modal('toggle');
+                    $('.modal-title').text('Edit Unit');
+                    $('#gst-modal').modal('toggle');
                 }
             });
         }
@@ -367,7 +381,7 @@
                 allVals.push($(this).attr('data-id'));
             });
             var join_selected_values = allVals.join(",");
-            remove_id(join_selected_values, '{{route('country.delete')}}', '#country-datatable');
+            remove_id(join_selected_values, '{{route('unit.delete')}}', '#gst-datatable');
         });
 
         $('.active_status_all').on('click', function (e) {
@@ -376,7 +390,7 @@
                 allVals.push($(this).attr('data-id'));
             });
             var join_selected_values = allVals.join(",");
-            change_status(join_selected_values, 0, '{{route('country.edit-status')}}', '#country-datatable');
+            change_status(join_selected_values, 0, '{{route('unit.edit-status')}}', '#gst-datatable');
         });
 
         $('.deactive_status_all').on('click', function (e) {
@@ -385,7 +399,7 @@
                 allVals.push($(this).attr('data-id'));
             });
             var join_selected_values = allVals.join(",");
-            change_status(join_selected_values, 1, '{{route('country.edit-status')}}', '#country-datatable');
+            change_status(join_selected_values, 1, '{{route('unit.edit-status')}}', '#gst-datatable');
         });
     </script>
 @endpush

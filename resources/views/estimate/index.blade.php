@@ -12,16 +12,15 @@
 @section('content')
     <?php
     $user_perm = PermissionCheck::check_permission('role-list');
-    $company_id = auth()->user()->company_id;
     ?>
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <?php if(in_array('add-estimate', $user_perm) || auth()->user()->company_id==null){  ?>
+                    @if(in_array('add-estimate', $user_perm) || auth()->user()->company_id==null)
                         <a href="{{route('quotes.new')}}" class="btn btn-info btn-sm mb-2"><i class="mdi mdi-plus-circle"></i> New</a>
-                    <?php } ?>
+                    @endif
                 </div>
                 <div class="page-title-left pt-2">
 
@@ -256,8 +255,6 @@
 
     <!-- third party js ends -->
     <script>
-        var user_perm = <?php echo json_encode($user_perm); ?>;
-        var company_id = '<?php echo $company_id; ?>';
         $(document).ready(function () {
             $('#followup_date').datepicker({
                 startDate: new Date(),
@@ -501,42 +498,26 @@
                             var duplicate_est_fun = "estimate_duplicate('" + row.action + "')";
                             var follow_up_fun = " openFollowUpModal('#follow-up-modal','Next Follow Up','#follow-up-form','.modal-title','" + row.action + "','0','" + row.estimate_no + "','" + row.status + "','{{route('event.index')}}',1,'" + row.customer_name + "','" + row.mobile_no + "')";
                             var view_fun = "{{url('quotes/show')}}/" + row.action;
-                            if($.inArray('edit-estimate', user_perm) != -1 || company_id==''){
-                                var edit ='<a href="' + edit_fun + '" title="Edit" class="action-icon me-1" id="edit_' + row.action + '">' +
-                                    '<i class="mdi mdi-square-edit-outline fs-4"></i>' +
-                                    '</a>';
-                            }else{
-                                var edit = '';
-                            }
-                            if($.inArray('remove-estimate', user_perm) != -1 || company_id==''){
-                                var del = '<a href="javascript:void(0)" title="Delete" class="action-icon" id="remove_' + row.action + '" onclick="' + delete_fun + '">' +
-                                    '<i class="mdi mdi-delete fs-4"></i>' +
-                                    '</a>' ;
-                            }else{
-                                var del = '';
-                            }
                             return '<div class="invoice-action">' +
-                                // '<a href="' + edit_fun + '" title="Edit" class="action-icon me-1" id="edit_' + row.action + '">' +
-                                // '<i class="mdi mdi-square-edit-outline fs-4"></i>' +
-                                // '</a>'
-                                edit +
-
-                                '<a href="' + row.download_action + '" title="Download" class="action-icon me-1" download>' +
-                                '<i class="mdi mdi-download fs-4"></i>' +
-                                '</a>' +
-                                /* '<a href="'+view_fun+'" title="View" class="anctio-icon me-1 text-muted" id="view_' + row.action + '">' +
-                                 '<i class="mdi mdi-eye fs-4"></i>' +
-                                 '</a>' +*/
-                                ' <a href="javascript:void(0)" title="Follow up" id="follow_up_' + row.action + '"  onclick="' + follow_up_fun + '"><i class="mdi mdi mdi-av-timer me-1 text-muted fs-4"></i></a>' +
-                                '<a href="javascript:void(0)" title="Share" class="copy_text" data-url="{!! url('/quotes/generate-link')!!}/' + row.action + '"><i class="mdi mdi-share-variant me-1 text-muted fs-4"></i></a>' +
-                                ' <a href="javascript:void(0)" title="Duplicate" class="action-icon" id="duplicate_' + row.action + '" onclick="' + duplicate_est_fun + '">' +
-                                '<i class="mdi mdi-content-copy fs-4"></i>' +
-                                '</a>' +
-                                // '<a href="javascript:void(0)" title="Delete" class="action-icon" id="remove_' + row.action + '" onclick="' + delete_fun + '">' +
-                                // '<i class="mdi mdi-delete fs-4"></i>' +
-                                // '</a>'
-                                del +
-                                '</div>';
+                                @if(in_array("edit-estimate", $user_perm) || auth()->user()->company_id==null)
+                                    '<a href="' + edit_fun + '" title="Edit" class="action-icon me-1" id="edit_' + row.action + '">' +
+                                    '<i class="mdi mdi-square-edit-outline fs-4"></i>' +
+                                    '</a>'+
+                                @endif
+                                    '<a href="' + row.download_action + '" title="Download" class="action-icon me-1" download>' +
+                                    '<i class="mdi mdi-download fs-4"></i>' +
+                                    '</a>' +
+                                    ' <a href="javascript:void(0)" title="Follow up" id="follow_up_' + row.action + '"  onclick="' + follow_up_fun + '"><i class="mdi mdi mdi-av-timer me-1 text-muted fs-4"></i></a>' +
+                                    '<a href="javascript:void(0)" title="Share" class="copy_text" data-url="{!! url('/quotes/generate-link')!!}/' + row.action + '"><i class="mdi mdi-share-variant me-1 text-muted fs-4"></i></a>' +
+                                    ' <a href="javascript:void(0)" title="Duplicate" class="action-icon" id="duplicate_' + row.action + '" onclick="' + duplicate_est_fun + '">' +
+                                    '<i class="mdi mdi-content-copy fs-4"></i>' +
+                                    '</a>' +
+                                @if(in_array("remove-estimate", $user_perm) || auth()->user()->company_id==null)
+                                    '<a href="javascript:void(0)" title="Delete" class="action-icon" id="remove_' + row.action + '" onclick="' + delete_fun + '">' +
+                                    '<i class="mdi mdi-delete fs-4"></i>' +
+                                    '</a>'+
+                                @endif
+                            '<div>';
 
                             /*  return '<div class="btn-group dropdown btn-group-sm">' +
                                   '<a href="#" class="table-action-btn dropdown-toggle arrow-none btn btn-light btn-xs" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>' +

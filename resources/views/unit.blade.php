@@ -10,18 +10,17 @@
 @section('content')
     <?php
     $user_perm = PermissionCheck::check_permission('role-list');
-    $company_id = auth()->user()->company_id;
     ?>
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <?php if(in_array('add-unit', $user_perm) || auth()->user()->company_id==null){  ?>
+                    @if(in_array('add-unit', $user_perm) || auth()->user()->company_id==null)
                         <a href="javascript:void(0);" class="btn btn-info btn-sm mb-2"
                        onclick="openModal('#unit-modal','Create Unit','#unit-form','.modal-title',id=0)"><i
                             class="mdi mdi-plus-circle"></i> New</a>
-                    <?php } ?>
+                    @endif
                     <div class="dropdown btn-group mb-2">
                         <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -134,8 +133,6 @@
     {{--    <script src="{{ asset('assets/js/pages/demo.datatable-init.js')}}"></script>--}}
     <!-- end demo js-->
     <script>
-        var user_perm = <?php echo json_encode($user_perm); ?>;
-        var company_id = '<?php echo $company_id; ?>';
         $(document).ready(function () {
             $.ajaxSetup({
                 headers: {
@@ -258,28 +255,18 @@
                         render: function (data, type, row) {
                             var edit_fun = "edit_id('" + row.action + "')";
                             var delete_fun = "remove_id('" + row.action + "','{{route('unit.delete')}}','#unit-datatable')";
-                            var edit = '';
-                            var del = '';
-                            if($.inArray('edit-unit', user_perm) != -1 || company_id==''){
-                                var edit ='<a href="javascript:void(0)" class="action-icon mr-1" id="edit_' + row.action + '" onclick="' + edit_fun + '">' +
-                                    '<i class="mdi mdi-square-edit-outline"></i>' +
-                                    '</a>';
-                            }
-                            if($.inArray('remove-unit', user_perm) != -1 || company_id==''){
-                                var del ='<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '">' +
-                                    '<i class="mdi mdi-delete"></i>' +
-                                    '</a>';
-                            }
                             return '<div class="invoice-action">' +
-                                // '<a href="javascript:void(0)" class="action-icon mr-1" id="edit_' + row.action + '" onclick="' + edit_fun + '">' +
-                                // '<i class="mdi mdi-square-edit-outline"></i>' +
-                                // '</a>'
-                            edit+
-                                // '<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '">' +
-                                // '<i class="mdi mdi-delete"></i>' +
-                                // '</a>'
-                               del +
-                                '</div>';
+                                @if(in_array('edit-unit', $user_perm) || auth()->user()->company_id==null)
+                                    '<a href="javascript:void(0)" class="action-icon mr-1" id="edit_' + row.action + '" onclick="' + edit_fun + '">' +
+                                    '<i class="mdi mdi-square-edit-outline"></i>' +
+                                    '</a>'+
+                                @endif
+                                @if(in_array('remove-unit', $user_perm) || auth()->user()->company_id==null)
+                                    '<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '">' +
+                                    '<i class="mdi mdi-delete"></i>' +
+                                    '</a>'+
+                                @endif
+                            '<div>';
                         }
                     },
                 ],

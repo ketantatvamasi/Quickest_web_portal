@@ -18,10 +18,10 @@
     <div class="col-12">
         <div class="page-title-box">
             <div class="page-title-right">
-                <?php if(in_array('add-role', $user_perm) || auth()->user()->company_id==null){  ?>
+                @if(in_array('add-role', $user_perm) || auth()->user()->company_id==null)
                     <a href="{{route('role-create')}}" class="btn btn-info btn-sm mb-2"><i
                         class="mdi mdi-plus-circle"></i> New</a>
-                <?php } ?>
+                @endif
                 <div class="dropdown btn-group mb-2">
                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -115,8 +115,6 @@
     {{--    <script src="{{ asset('assets/js/pages/demo.datatable-init.js')}}"></script>--}}
     <!-- end demo js-->
     <script>
-        var user_perm = <?php echo json_encode($user_perm); ?>;
-        var company_id = '<?php echo $company_id; ?>';
         $(document).ready(function () {
             $.ajaxSetup({
                 headers: {
@@ -221,30 +219,21 @@
                         render: function (data, type, row) {
                             var edit_fun = '{{url('role-edit')}}/'+ row.action;
                             var delete_fun = "remove_id('" + row.action + "','{{route('role.delete')}}','#role-datatable')";
-                            var edit ='';
-                            var delete_action ='';
-                            // var delete_action = '<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '"><i class="mdi mdi-delete"></i></a>';
-                            // if(row.display_flag==1){
-                            //     delete_action='';
-                            // }
-                            if($.inArray('edit-role', user_perm) != -1 || company_id==''){
-                                var edit ='<a href="'+edit_fun+'" class="action-icon mr-1">' +
-                                    '<i class="mdi mdi-square-edit-outline"></i>' +
-                                    '</a>';
-                            }
-                            if($.inArray('remove-role', user_perm) != -1 || company_id==''){
+                            var delete_action='';
+                            @if(in_array("remove-role", $user_perm) || auth()->user()->company_id==null)
                                 var delete_action = '<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '"><i class="mdi mdi-delete"></i></a>';
-                            }
+                            @endif
                             if(row.display_flag==1){
                                 delete_action='';
                             }
                             return '<div class="invoice-action">' +
-                                // '<a href="'+edit_fun+'" class="action-icon mr-1">' +
-                                // '<i class="mdi mdi-square-edit-outline"></i>' +
-                                // '</a>'
-                                edit +
+                                @if(in_array("edit-role", $user_perm) || auth()->user()->company_id==null)
+                                    '<a href="javascript:void(0)" class="action-icon mr-1" id="edit_' + row.action + '" onclick="' + edit_fun + '">' +
+                                '<i class="mdi mdi-square-edit-outline"></i>' +
+                                '</a>'+
+                                @endif
                                 delete_action+
-                                '</div>';
+                            '<div>';
                         }
                     },
                 ],
