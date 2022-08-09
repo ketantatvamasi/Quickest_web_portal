@@ -119,7 +119,6 @@ function remove_id(id, url, tableName) {
                     data: {id: id},
                     dataType: "json",
                     success: function (data, textStatus, jqXHR) {
-
                         $(tableName).DataTable().ajax.reload();
                         $("#remove_" + id).closest("tr").hide('slow');
                         $('#select_all').prop('checked', false);

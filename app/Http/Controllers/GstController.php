@@ -87,7 +87,7 @@ class GstController extends Controller
                 ->orWhere(function ($query) use ($search_arr) {
                     if ($search_arr) {
                         $query->orWhere(function ($query) use ($search_arr) {
-                            $query->where('description', 'like', $search_arr . '%');
+                            $query->where('name', 'like', $search_arr . '%');
                         });
                     }
                 })
@@ -165,87 +165,87 @@ class GstController extends Controller
             $input['id'] = ($input['id']) ? Crypt::decrypt($input['id']) : $input['id'];
             LogActivity::addToLog($activityLogMsg, $input);
 
-            return response()->json(['success' => 'Unit Saved!'], 201);
+            return response()->json(['success' => 'GST Saved!'], 201);
         }
     }
 
-//    public function show(Request $request)
-//    {
-//        if ($request->ajax()) {
-//            $input = $request->all();
-//            $id = Crypt::decrypt($input['id']);
-//            $validator = Validator::make($input, [
-//                'id' => 'required'
-//            ]);
-//            if ($validator->fails()) {
-//                return response()->json(['errors' => $validator->errors()->all()], 400);
-//            }
-//            $user = Auth::user();
-//
-//            $unit = Unit::find($id)->toArray();
-//
-//            if (is_null($unit)) {
-//                return response()->json(['success' => 'Unit not found!'], 422);
-//            }
-//            $unit['id'] = Crypt::encrypt($unit['id']);
-//            return response()->json([
-//                "success" => true,
-//                "message" => "Unit retrieved successfully.",
-//                "data" => $unit
-//            ], 201);
-//        }
-//    }
-//
-//    public function destroy(Request $request)
-//    {
-//        if ($request->ajax()) {
-//            $input = $request->all();
-//            $validator = Validator::make($input, [
-//                'id' => 'required'
-//            ]);
-//            if ($validator->fails()) {
-//                return response()->json(['errors' => $validator->errors()->all()], 400);;
-//            }
-//            $user = Auth::user();
-//            $id = [];
-//            foreach (explode(",", $request->id) as $value) {
-//                $id[] = Crypt::decrypt($value);
-//            }
-//            $unit = Unit::whereIn('id', $id)->delete();
-//
-//            LogActivity::addToLog('Unit deleted by ' . $user->name, $id);
-//            return response()->json(['success' => 'Unit Deleted!'], 201);
-//        }
-//    }
-//
-//
-//    public function editStatus(Request $request)
-//    {
-//        if ($request->ajax()) {
-//            $input = $request->all();
-//
-//            $validator = Validator::make($input, [
-//                'id' => 'required'
-//            ]);
-//            if ($validator->fails()) {
-//                return response()->json(['errors' => $validator->errors()->all()], 400);;
-//            }
-//            $user = Auth::user();
-//            $id = [];
-//            foreach (explode(",", $input['id']) as $value) {
-//                $id[] = Crypt::decrypt($value);
-//            }
-//            if (!Unit::whereIn('id', $id)->first()) {
-//                return response()->json(['success' => 'Unit exists!'], 422);
-//            }
-//            $unit = Unit::whereIn('id', $id)->update(["status" => $input['status']]);
-//
-//            $data['id'] = $id;
-//            $data['status'] = ($input['status'] == 0) ? 'Active' : 'Deactive';
-//            LogActivity::addToLog('Unit status updated by ' . $user->name, $data);
-//
-//            return response()->json(['success' => 'Unit status updated!'], 201);
-//        }
-//    }
+    public function show(Request $request)
+    {
+        if ($request->ajax()) {
+            $input = $request->all();
+            $id = Crypt::decrypt($input['id']);
+            $validator = Validator::make($input, [
+                'id' => 'required'
+            ]);
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()->all()], 400);
+            }
+            $user = Auth::user();
+
+            $gst = Gst::find($id)->toArray();
+
+            if (is_null($gst)) {
+                return response()->json(['success' => 'Gst not found!'], 422);
+            }
+            $gst['id'] = Crypt::encrypt($gst['id']);
+            return response()->json([
+                "success" => true,
+                "message" => "Unit retrieved successfully.",
+                "data" => $gst
+            ], 201);
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        if ($request->ajax()) {
+            $input = $request->all();
+            $validator = Validator::make($input, [
+                'id' => 'required'
+            ]);
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()->all()], 400);;
+            }
+            $user = Auth::user();
+            $id = [];
+            foreach (explode(",", $request->id) as $value) {
+                $id[] = Crypt::decrypt($value);
+            }
+            $gst = Gst::whereIn('id', $id)->delete();
+
+            LogActivity::addToLog('Gst deleted by ' . $user->name, $id);
+            return response()->json(['success' => 'Gst Deleted!'], 201);
+        }
+    }
+
+
+    public function editStatus(Request $request)
+    {
+        if ($request->ajax()) {
+            $input = $request->all();
+
+            $validator = Validator::make($input, [
+                'id' => 'required'
+            ]);
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()->all()], 400);;
+            }
+            $user = Auth::user();
+            $id = [];
+            foreach (explode(",", $input['id']) as $value) {
+                $id[] = Crypt::decrypt($value);
+            }
+            if (!Gst::whereIn('id', $id)->first()) {
+                return response()->json(['success' => 'Gst exists!'], 422);
+            }
+            $unit = Gst::whereIn('id', $id)->update(["status" => $input['status']]);
+
+            $data['id'] = $id;
+            $data['status'] = ($input['status'] == 0) ? 'Active' : 'Deactive';
+            LogActivity::addToLog('Gst status updated by ' . $user->name, $data);
+
+            return response()->json(['success' => 'Gst status updated!'], 201);
+        }
+    }
 }
 

@@ -132,10 +132,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         //GST
         Route::controller(GstController::class)->name('gst.')->group(function () { //middleware(['permissionCheck:unit_view'])->
             Route::get('gst', 'index')->name('index');
-//            Route::get('unit-show', 'show')->name('show');
+            Route::get('gst-show', 'show')->name('show');
             Route::post('store-gst', 'store')->name('store');
-//            Route::post('edit-unit-status', 'editStatus')->name('edit-status');
-//            Route::post('delete-unit', 'destroy')->name('delete');
+            Route::post('edit-gst-status', 'editStatus')->name('edit-status');
+            Route::post('delete-gst', 'destroy')->name('delete');
 
         });
 

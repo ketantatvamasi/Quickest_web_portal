@@ -18,7 +18,7 @@
                 <div class="page-title-right">
 {{--                    @if(in_array('add-unit', $user_perm) || auth()->user()->company_id==null)--}}
                         <a href="javascript:void(0);" class="btn btn-info btn-sm mb-2"
-                           onclick="openModal('#GST-modal','Create GST','#gst-form','.modal-title',id=0)"><i
+                           onclick="openModal('#gst-modal','Create GST','#gst-form','.modal-title',id=0)"><i
                                 class="mdi mdi-plus-circle"></i> New</a>
 {{--                    @endif--}}
                     <div class="dropdown btn-group mb-2">
@@ -77,7 +77,7 @@
         </div><!-- end col-->
     </div>
     <!-- end row-->
-    <div id="GST-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="gst-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-right" style="width: 100%;">
             <div class="modal-content" style="height: 100%;">
                 <div class="modal-header border-1 bg-light">
@@ -89,27 +89,13 @@
 
                         <div class="mb-3">
                             <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
-{{--                            <input class="form-control" type="text" id="name" name="name" required=""--}}
-{{--                                   placeholder="Enter GST lable" autofocus>--}}
                             <div class="input-group input-group-merge">
-                                <input class="form-control" type="text" id="name" name="name" required=""
-                                       placeholder="Enter name" autofocus>
-{{--                                <input type="text" id="name" name="name" class="form-control" placeholder="Enter name">--}}
-                                <div class="input-group-text">
-                                    <i class="mdi mdi-percent"></i>
-                                </div>
+                                <input class="form-control" type="text" id="name" name="name" required="" placeholder="Enter name" autofocus data-parsley-errors-container="#errorBlock">
+                                <span class="input-group-text icon"><i class="mdi mdi-percent"></i></span>
                             </div>
+                            <div id="errorBlock"></div>
                             <input class="form-control" type="hidden" id="id" name="id" value="0">
                         </div>
-
-{{--                        <div class="mb-3">--}}
-{{--                            <label for="gst_value" class="form-label">GST value</label>--}}
-{{--                            <input class="form-control" id="gst_value" name="gst_value"--}}
-{{--                                   placeholder="Enter GST value" data-parsley-type="number" >--}}
-{{--                            <textarea class="form-control" id="gst_value" name="gst_value"--}}
-{{--                                      placeholder="Enter gst value"></textarea>--}}
-{{--                        </div>--}}
-
                         <div class="mb-3 text-end">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                             <button class="btn btn-secondary" id="gst_button" type="submit"><i
@@ -249,11 +235,11 @@
                     {
                         data: 'status', name: 'status',
                         render: function (data, type, row) {
-                            var fun_status = "change_status('" + row.action + "', 1,'{{route('unit.edit-status')}}','#gst-datatable')";
+                            var fun_status = "change_status('" + row.action + "', 1,'{{route('gst.edit-status')}}','#gst-datatable')";
                             if (data == 0)
                                 return '<span class="badge badge-success-lighten" onclick="' + fun_status + '">Active</span>';
                             else {
-                                fun_status = "change_status('" + row.action + "', 0,'{{route('unit.edit-status')}}','#gst-datatable')";
+                                fun_status = "change_status('" + row.action + "', 0,'{{route('gst.edit-status')}}','#gst-datatable')";
                                 return '<span class="badge badge-danger-lighten" onclick="' + fun_status + '">Deactive</span>';
                             }
 
@@ -263,14 +249,14 @@
                         data: 'action', name: 'action', orderable: false,
                         render: function (data, type, row) {
                             var edit_fun = "edit_id('" + row.action + "')";
-                            var delete_fun = "remove_id('" + row.action + "','{{route('unit.delete')}}','#gst-datatable')";
+                            var delete_fun = "remove_id('" + row.action + "','{{route('gst.delete')}}','#gst-datatable')";
                             return '<div class="invoice-action">' +
-                                @if(in_array('edit-unit', $user_perm) || auth()->user()->company_id==null)
+                                @if(in_array('edit-gst', $user_perm) || auth()->user()->company_id==null)
                                     '<a href="javascript:void(0)" class="action-icon mr-1" id="edit_' + row.action + '" onclick="' + edit_fun + '">' +
                                 '<i class="mdi mdi-square-edit-outline"></i>' +
                                 '</a>'+
                                 @endif
-                                    @if(in_array('remove-unit', $user_perm) || auth()->user()->company_id==null)
+                                    @if(in_array('remove-gst', $user_perm) || auth()->user()->company_id==null)
                                     '<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '">' +
                                 '<i class="mdi mdi-delete"></i>' +
                                 '</a>'+
@@ -322,7 +308,6 @@
                             $("#gst_button").html('<i class="mdi mdi-spin mdi-loading"></i> Loading...');
                         },
                         success: function (data) {
-                            console.log(data);
                             toastrSuccess('Successfully saved...', 'Success');
                             $('#gst-modal').modal('toggle');
                             table.ajax.reload();
@@ -360,15 +345,14 @@
             $.ajax({
                 async: false,
                 type: "GET",
-                url: "{{route('unit.show')}}",
+                url: "{{route('gst.show')}}",
                 data: {id: id},
                 dataType: "json",
                 success: function (res) {
                     resetFormValidation("#gst-form");
                     $('#id').val(res.data.id);
                     $('#name').val(res.data.name);
-                    $('#description').val(res.data.description);
-                    $('.modal-title').text('Edit Unit');
+                    $('.modal-title').text('Edit GST');
                     $('#gst-modal').modal('toggle');
                 }
             });
@@ -381,7 +365,7 @@
                 allVals.push($(this).attr('data-id'));
             });
             var join_selected_values = allVals.join(",");
-            remove_id(join_selected_values, '{{route('unit.delete')}}', '#gst-datatable');
+            remove_id(join_selected_values, '{{route('gst.delete')}}', '#gst-datatable');
         });
 
         $('.active_status_all').on('click', function (e) {
@@ -390,7 +374,7 @@
                 allVals.push($(this).attr('data-id'));
             });
             var join_selected_values = allVals.join(",");
-            change_status(join_selected_values, 0, '{{route('unit.edit-status')}}', '#gst-datatable');
+            change_status(join_selected_values, 0, '{{route('gst.edit-status')}}', '#gst-datatable');
         });
 
         $('.deactive_status_all').on('click', function (e) {
@@ -399,7 +383,7 @@
                 allVals.push($(this).attr('data-id'));
             });
             var join_selected_values = allVals.join(",");
-            change_status(join_selected_values, 1, '{{route('unit.edit-status')}}', '#gst-datatable');
+            change_status(join_selected_values, 1, '{{route('gst.edit-status')}}', '#gst-datatable');
         });
     </script>
 @endpush
