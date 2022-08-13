@@ -38,6 +38,7 @@ $user_perm = PermissionCheck::check_permission('role-list');
                     <span> Dashboard </span>
                 </a>
             </li>
+            @if(in_array('follow-up-list', $user_perm) || auth()->user()->company_id==null)
             <li class="side-nav-item">
                 <a href="{{route('event.follow-up-history')}}" class="side-nav-link">
                     <i class="uil-stopwatch"></i>
@@ -45,111 +46,115 @@ $user_perm = PermissionCheck::check_permission('role-list');
                     <span> Follow Up </span>
                 </a>
             </li>
-            <?php if(in_array('unit-list', $user_perm) || auth()->user()->company_id==null){  ?>
+            @endif
+
+            @if(in_array('unit-list', $user_perm) || auth()->user()->company_id==null)
             <li class="side-nav-item">
                 <a href="{{url('unit')}}" class="side-nav-link">
                     <i class="uil-cart"></i>
                     <span> Unit </span>
                 </a>
             </li>
-            <?php } ?>
+            @endif
 
+            @if(in_array('gst-list', $user_perm) || auth()->user()->company_id==null)
             <li class="side-nav-item">
                 <a href="{{url('gst')}}" class="side-nav-link">
                     <i class="uil-cart"></i>
                     <span> GST </span>
                 </a>
             </li>
+            @endif
 
-            <?php if(in_array('item-list', $user_perm) || auth()->user()->company_id==null){?>
+            @if(in_array('item-list', $user_perm) || auth()->user()->company_id==null)
             <li class="side-nav-item">
                 <a href="{{url('item')}}" class="side-nav-link">
                     <i class="uil-shopping-cart-alt"></i>
                     <span> Item </span>
                 </a>
             </li>
-            <?php } ?>
+            @endif
 
-            <?php if(in_array('product-list', $user_perm) || auth()->user()->company_id==null){ ?>
+            @if(in_array('product-list', $user_perm) || auth()->user()->company_id==null)
             <li class="side-nav-item">
                 <a href="{{url('product')}}" class="side-nav-link">
                     <i class="uil-shopping-basket"></i>
                     <span> Product </span>
                 </a>
             </li>
-            <?php } ?>
+            @endif
 
-            <?php if(in_array('testimonial-list', $user_perm) || auth()->user()->company_id==null){ ?>
+            @if(in_array('testimonial-list', $user_perm) || auth()->user()->company_id==null)
             <li class="side-nav-item">
                 <a href="{{url('testimonial')}}" class="side-nav-link">
                     <i class="uil-shopping-basket"></i>
                     <span> Testimonial </span>
                 </a>
             </li>
-            <?php } ?>
+            @endif
 
-            <?php if(in_array('country-list', $user_perm) || auth()->user()->company_id==null){ ?>
+            @if(in_array('country-list', $user_perm) || auth()->user()->company_id==null)
             <li class="side-nav-item">
                 <a href="{{url('country')}}" class="side-nav-link">
                     <i class="uil-calender"></i>
                     <span> Country </span>
                 </a>
             </li>
-            <?php } ?>
+            @endif
 
-            <?php if(in_array('state-list', $user_perm) || auth()->user()->company_id==null){ ?>
+            @if(in_array('state-list', $user_perm) || auth()->user()->company_id==null)
             <li class="side-nav-item">
                 <a href="{{url('state')}}" class="side-nav-link">
                     <i class="uil-calender"></i>
                     <span> State </span>
                 </a>
             </li>
-            <?php } ?>
+            @endif
 
-            <?php if(in_array('city-list', $user_perm) || auth()->user()->company_id==null){ ?>
+            @if(in_array('city-list', $user_perm) || auth()->user()->company_id==null)
             <li class="side-nav-item">
                 <a href="{{url('city')}}" class="side-nav-link">
                     <i class="uil-calender"></i>
                     <span> City </span>
                 </a>
             </li>
-            <?php } ?>
+            @endif
 
-            <?php if(in_array('customer-list', $user_perm) || auth()->user()->company_id==null){ ?>
+            @if(in_array('customer-list', $user_perm) || auth()->user()->company_id==null)
             <li class="side-nav-item">
                 <a href="{{url('customer')}}" class="side-nav-link">
                     <i class="uil-user"></i>
                     <span> Customer </span>
                 </a>
             </li>
-            <?php } ?>
+            @endif
 
-            <?php if(in_array('estimate-list', $user_perm) || auth()->user()->company_id==null){ ?>
+            @if(in_array('estimate-list', $user_perm) || auth()->user()->company_id==null)
             <li class="side-nav-item">
                 <a href="{{route('quotes.index')}}" class="side-nav-link">
                     <i class="uil-notebooks"></i>
                     <span> Estimates </span>
                 </a>
             </li>
-            <?php } ?>
+            @endif
 
-            <?php if(in_array('user-list', $user_perm) || auth()->user()->company_id==null){ ?>
+            @if(in_array('user-list', $user_perm) || auth()->user()->company_id==null)
             <li class="side-nav-item">
                 <a href="{{route('user.index')}}" class="side-nav-link">
                     <i class="uil-user-square"></i>
                     <span> User </span>
                 </a>
             </li>
-            <?php } ?>
+            @endif
 
-            <?php if(in_array('role-list', $user_perm) || auth()->user()->company_id==null){?>
+            @if(in_array('role-list', $user_perm) || auth()->user()->company_id==null)
             <li class="side-nav-item">
                 <a href="{{route('role.index')}}" class="side-nav-link">
                     <i class="uil-user-square"></i>
                     <span> Roles </span>
                 </a>
             </li>
-            <?php } ?>
+            @endif
 
             <li class="side-nav-title side-nav-item mt-1">Settings</li>
             <li class="side-nav-item">

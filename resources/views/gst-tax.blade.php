@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Unit')
+@section('title','GST')
 @push('styles')
     <link href="{{ asset('assets/css/vendor/dataTables.bootstrap5.css')}}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/vendor/responsive.bootstrap5.css')}}" rel="stylesheet" type="text/css">
@@ -13,33 +13,27 @@
     ?>
     <!-- start page title -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-12">    
             <div class="page-title-box">
                 <div class="page-title-right">
-{{--                    @if(in_array('add-unit', $user_perm) || auth()->user()->company_id==null)--}}
+                    @if(in_array('add-gst', $user_perm) || auth()->user()->company_id==null)
                         <a href="javascript:void(0);" class="btn btn-info btn-sm mb-2"
-                           onclick="openModal('#gst-modal','Create GST','#gst-form','.modal-title',id=0)"><i
-                                class="mdi mdi-plus-circle"></i> New</a>
-{{--                    @endif--}}
+                           onclick="openModal('#gst-modal','Create GST','#gst-form','.modal-title',id=0)">
+                            <i class="mdi mdi-plus-circle"></i> New</a>
+                    @endif
                     <div class="dropdown btn-group mb-2">
                         <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span
-                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                        id="select_count">0</span>Bulk Action
-                            {{--                                    <span class="badge badge-success-lighten" id="select_count">0</span> --}}
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="select_count">0</span>Bulk Action
+{{--                                    <span class="badge badge-success-lighten" id="select_count">0</span> --}}
                         </button>
                         <div class="dropdown-menu dropdown-menu-animated">
-                            <a href="javascript:void(0);" class="dropdown-item active_status_all"><i
-                                    class="mdi mdi-update"></i> Active All</a>
-                            <a href="javascript:void(0);" class="dropdown-item deactive_status_all"><i
-                                    class="mdi mdi-update"></i> Deactive All</a>
-                            <a href="javascript:void(0);" class="dropdown-item delete_all"><i
-                                    class="mdi mdi-delete-circle"></i> Delete All</a>
+                            <a href="javascript:void(0);" class="dropdown-item active_status_all"><i class="mdi mdi-update"></i> Active All</a>
+                            <a href="javascript:void(0);" class="dropdown-item deactive_status_all"><i class="mdi mdi-update"></i> Deactive All</a>
+                            <a href="javascript:void(0);" class="dropdown-item delete_all"><i class="mdi mdi-delete-circle"></i> Delete All</a>
                         </div>
                     </div>
                 </div>
-
                 <div class="page-title-left pt-2">
                     {{--<h4 class="page-title">Unit</h4>--}}
                     <select class="form-select" id="fil_status" name="fil_status" style="width: 170px;background-color: #fff0 !important;border: 0px solid #fff !important;font-size: 18px;margin: 0;white-space: nowrap;font-weight: 700;padding: 0.0rem 0.0rem 0rem 0.5rem;">
@@ -47,7 +41,6 @@
                         <option value="0">Active Gsts</option>
                         <option value="1">Deactive Gsts</option>
                     </select>
-
                 </div>
             </div>
         </div>
@@ -86,7 +79,6 @@
                 </div>
                 <div class="modal-body">
                     <form class="ps-3 pe-3 gst-form" id="gst-form" action="#">
-
                         <div class="mb-3">
                             <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
                             <div class="input-group input-group-merge">
@@ -98,18 +90,13 @@
                         </div>
                         <div class="mb-3 text-end">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                            <button class="btn btn-secondary" id="gst_button" type="submit"><i
-                                    class="uil-arrow-circle-right"></i> Save
-                            </button>
+                            <button class="btn btn-secondary" id="gst_button" type="submit"><i class="uil-arrow-circle-right"></i> Save</button>
                         </div>
-
                     </form>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
-
 
 @endsection
 @push('scripts')
@@ -164,7 +151,7 @@
                             title:'PDF',
                             class:'btn btn-light buttons-html5 buttons-pdf',
                         },
-                        title: 'Unit List',
+                        title: 'GST List',
                         exportOptions: {
                             columns: ':visible'
                         }
@@ -176,7 +163,7 @@
                             title:'Excel',
                             class:'btn btn-light buttons-html5 buttons-excel',
                         },
-                        title: 'Unit List',
+                        title: 'GST List',
                         exportOptions: {
                             columns: ':visible'
                         }
@@ -253,15 +240,15 @@
                             return '<div class="invoice-action">' +
                                 @if(in_array('edit-gst', $user_perm) || auth()->user()->company_id==null)
                                     '<a href="javascript:void(0)" class="action-icon mr-1" id="edit_' + row.action + '" onclick="' + edit_fun + '">' +
-                                '<i class="mdi mdi-square-edit-outline"></i>' +
-                                '</a>'+
+                                    '<i class="mdi mdi-square-edit-outline"></i>' +
+                                    '</a>'+
                                 @endif
-                                    @if(in_array('remove-gst', $user_perm) || auth()->user()->company_id==null)
+                                @if(in_array('remove-gst', $user_perm) || auth()->user()->company_id==null)
                                     '<a href="javascript:void(0)" class="action-icon" id="remove_' + row.action + '"  onclick="' + delete_fun + '">' +
-                                '<i class="mdi mdi-delete"></i>' +
-                                '</a>'+
+                                    '<i class="mdi mdi-delete"></i>' +
+                                    '</a>'+
                                 @endif
-                                    '<div>';
+                                '<div>';
                         }
                     },
                 ],
